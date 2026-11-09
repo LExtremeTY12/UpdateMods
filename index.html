@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10150f">
+  <meta name="description" data-i18n-content="description" content="Encontra os teus mods de Minecraft Java na versão certa e descarrega tudo num ZIP.">
+  <title>UpdateMods — Minecraft Java</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/styles.css">
+  <script type="module" src="./assets/app.js"></script>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" class="symbols" aria-hidden="true">
+    <symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 2.5 8.5 4.8v9.4L12 21.5l-8.5-4.8V7.3L12 2.5ZM4 7.6l8 4.5 8-4.5m-8 4.5v9.1"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5zm7 4v2"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="m9.5 14.5 5-5m-7 7 2-2m5-5 2-2M8 12l-2 2a3.5 3.5 0 0 0 5 5l2-2m-2-10 2-2a3.5 3.5 0 0 1 5 5l-2 2"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></symbol>
+  </svg>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="./">
+        <span class="brand-icon"><svg class="icon" aria-hidden="true"><use href="#i-cube"/></svg></span>
+        <span>UpdateMods</span>
+      </a>
+      <div class="language-switch" role="group" data-i18n-label="language" aria-label="Idioma">
+        <button type="button" data-language="pt" lang="pt-PT" aria-label="Português" aria-pressed="true">PT</button>
+        <button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="overline"><span class="pixel"></span> <span data-i18n="heroTag">PARA MINECRAFT JAVA</span></p>
+        <h1 id="page-title"><span data-i18n="heroLineOne">Os teus mods,</span><br><em data-i18n="heroLineTwo">na versão certa.</em></h1>
+        <p class="intro" data-i18n="intro">Mudaste de versão? Descobre que mods podes levar contigo e descarrega-os num só ZIP.</p>
+        <a class="hero-link" href="#workspace"><span data-i18n="heroAction">Atualizar os meus mods</span> <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img src="./assets/terrain.svg" alt="" width="568" height="348" fetchpriority="high">
+        <span class="spark spark-a"></span>
+        <span class="spark spark-b"></span>
+        <span class="spark spark-c"></span>
+        <span class="spark spark-d"></span>
+      </div>
+    </section>
+
+    <form id="resolver" class="workspace" data-i18n-label="setupAria" aria-label="Configurar pesquisa de mods">
+      <div class="section-label" id="workspace"><span class="rail"></span><span data-i18n="setupLabel">PREPARAR MODS</span><span class="rail"></span></div>
+      <div class="form-grid">
+        <section class="panel" aria-labelledby="files-heading">
+          <header class="step-header">
+            <span class="step-number" aria-hidden="true">01</span>
+            <div><h2 id="files-heading" data-i18n="addMods">Adiciona os teus mods</h2><p data-i18n="addDescription">Escolhe os ficheiros da tua pasta de mods.</p></div>
+          </header>
+          <label id="drop" class="drop" for="files">
+            <span class="drop-icon"><svg class="icon" aria-hidden="true"><use href="#i-upload"/></svg></span>
+            <strong data-i18n="dragFiles">Arrasta os teus mods para aqui</strong>
+            <span><span data-i18n="or">ou</span> <b data-i18n="selectFiles">seleciona ficheiros</b> <span data-i18n="onComputer">no computador</span></span>
+            <span class="file-type">.JAR</span>
+          </label>
+          <input id="files" class="sr-only" type="file" accept=".jar" multiple>
+          <details class="add-project">
+            <summary><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg> <span data-i18n="addByLink">Adicionar por link do Modrinth</span></summary>
+            <div class="link-entry">
+              <input id="project-input" type="text" data-i18n-label="projectInput" aria-label="Link ou nome curto do mod no Modrinth" placeholder="modrinth.com/mod/sodium" autocomplete="off">
+              <button id="add-project" class="button secondary compact" type="button" data-i18n="add">Adicionar</button>
+            </div>
+          </details>
+          <div id="selection" class="selection" hidden>
+            <div class="selection-head"><strong id="selection-count"></strong><button id="clear" class="text-button" type="button" data-i18n="clear">Limpar tudo</button></div>
+            <ul id="selection-list" class="selection-list"></ul>
+          </div>
+          <p id="file-note" class="notice" role="status" hidden></p>
+        </section>
+
+        <section class="panel" aria-labelledby="target-heading">
+          <header class="step-header">
+            <span class="step-number" aria-hidden="true">02</span>
+            <div><h2 id="target-heading" data-i18n="target">Escolhe a versão de destino</h2><p data-i18n="targetDescription">Configura o Minecraft onde vais jogar.</p></div>
+          </header>
+          <div class="field">
+            <label for="game" data-i18n="gameVersion">Versão do Minecraft</label>
+            <select id="game" required disabled><option value="" data-i18n="versionsLoading">A carregar versões…</option></select>
+            <button id="retry-versions" class="text-button" type="button" hidden data-i18n="retryVersions">Voltar a carregar</button>
+            <p id="catalog-note" class="hint" role="status" hidden></p>
+          </div>
+          <div class="field">
+            <label for="loader" data-i18n="loader">Loader de mods</label>
+            <select id="loader" required>
+              <option value="" data-i18n="chooseLoader">Seleciona um loader</option>
+              <option value="fabric">Fabric</option>
+              <option value="forge">Forge</option>
+              <option value="neoforge">NeoForge</option>
+              <option value="quilt">Quilt</option>
+              <option value="liteloader">LiteLoader</option>
+              <option value="rift">Rift</option>
+            </select>
+          </div>
+          <p class="hint loader-hint"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg> <span data-i18n="loaderHint">Usa o mesmo loader do teu perfil do Minecraft.</span></p>
+        </section>
+      </div>
+      <div class="run-bar">
+        <p class="privacy"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg> <span data-i18n="privacy">Os teus ficheiros ficam protegidos e não vão ser partilhados.</span></p>
+        <button id="resolve" class="button primary" type="submit" disabled><span data-i18n="search">Procurar versões</span> <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
+      <p id="resolve-note" class="notice resolve-note" role="status" hidden></p>
+    </form>
+
+    <section id="results" class="panel results" aria-labelledby="result-heading" hidden>
+      <header class="results-header">
+        <div>
+          <p class="overline"><span class="pixel"></span> <span data-i18n="results">RESULTADOS</span></p>
+          <h2 id="result-heading" tabindex="-1" data-i18n="resultHeading">As versões dos teus mods</h2>
+          <p id="result-target" class="result-target"></p>
+        </div>
+        <div class="result-actions">
+          <button id="links" class="button secondary" type="button" data-i18n="saveLinks">Guardar lista de links</button>
+          <button id="prepare-zip" class="button primary" type="button"><span data-i18n="prepareZip">Preparar ZIP</span> <svg class="icon" aria-hidden="true"><use href="#i-cube"/></svg></button>
+          <a id="download-zip" class="button primary" hidden><span data-i18n="downloadZip">Descarregar ZIP</span> <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></a>
+        </div>
+      </header>
+      <div id="zip-progress" class="zip-progress" hidden>
+        <progress id="zip-meter" value="0" max="1" data-i18n-label="zipProgress" aria-label="Progresso da preparação do ZIP"></progress>
+      </div>
+      <p id="zip-note" class="notice" role="status" hidden></p>
+      <div id="counts" class="counts"></div>
+      <ul id="result-list" class="result-list"></ul>
+      <p class="hint result-foot" data-i18n="resultFoot">O ZIP inclui os mods compatíveis da tua lista. Confirma no Modrinth se precisam de dependências adicionais.</p>
+    </section>
+    <noscript><p class="notice error" data-i18n="noscript">Ativa o JavaScript no browser para procurar versões e preparar o ZIP.</p></noscript>
+  </main>
+
+  <footer class="wrap footer">
+    <span class="footer-brand"><svg class="icon" aria-hidden="true"><use href="#i-cube"/></svg> UpdateMods</span>
+    <span data-i18n="credit">Desenvolvido por LExtremeTY</span>
+  </footer>
+</body>
+</html>
