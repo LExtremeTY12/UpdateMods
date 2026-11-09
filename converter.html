@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10150f">
+  <meta name="description" data-i18n-content="converterDescription" content="Converte receitas e tags de mods Fabric e descarrega um novo JAR.">
+  <title>Converter JAR — UpdateMods</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/styles.css">
+  <script type="module" src="./assets/converter-page.js"></script>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" class="symbols" aria-hidden="true">
+    <symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 2.5 8.5 4.8v9.4L12 21.5l-8.5-4.8V7.3L12 2.5ZM4 7.6l8 4.5 8-4.5m-8 4.5v9.1"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5zm7 4v2"/></symbol>
+  </svg>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="./">
+        <span class="brand-icon"><svg class="icon" aria-hidden="true"><use href="#i-cube"/></svg></span>
+        <span>UpdateMods</span>
+      </a>
+      <div class="topbar-actions">
+        <a class="nav-link" href="./" data-i18n="converterLookupNav">Procurar mods</a>
+        <div class="language-switch" role="group" data-i18n-label="language" aria-label="Idioma">
+          <button type="button" data-language="pt" lang="pt-PT" aria-label="Português" aria-pressed="true">PT</button>
+          <button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero converter-hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="overline"><span class="pixel"></span> <span data-i18n="converterBadge">FABRIC · CONVERSÃO EXPERIMENTAL</span></p>
+        <h1 id="page-title"><span data-i18n="converterHeroFirst">Um mod antigo,</span><br><em data-i18n="converterHeroSecond">um novo JAR.</em></h1>
+        <p class="intro" data-i18n="converterIntro">Adiciona o mod antigo e escolhe o destino. Para os formatos suportados, o UpdateMods adapta os dados e prepara outro .jar.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img src="./assets/terrain.svg" alt="" width="568" height="348" fetchpriority="high">
+        <span class="spark spark-a"></span>
+        <span class="spark spark-b"></span>
+      </div>
+    </section>
+
+    <form id="converter-form" class="workspace" data-i18n-label="converterNav" aria-label="Converter JAR">
+      <div class="section-label"><span class="rail"></span><span data-i18n="converterSection">CONVERTER MOD</span><span class="rail"></span></div>
+      <div class="form-grid">
+        <section class="panel" aria-labelledby="converter-file-heading">
+          <header class="step-header">
+            <span class="step-number" aria-hidden="true">01</span>
+            <div>
+              <h2 id="converter-file-heading" data-i18n="converterFileHeading">Adiciona o mod antigo</h2>
+              <p data-i18n="converterFileHint">Um .jar Fabric ou um ZIP com um único .jar.</p>
+            </div>
+          </header>
+          <label id="converter-drop" class="drop" for="converter-file">
+            <span class="drop-icon"><svg class="icon" aria-hidden="true"><use href="#i-upload"/></svg></span>
+            <strong data-i18n="converterDrag">Arrasta o ficheiro para aqui</strong>
+            <span data-i18n="converterChoose">ou escolhe um ficheiro no computador</span>
+            <span class="file-type">.JAR / .ZIP · 64 MiB</span>
+          </label>
+          <input id="converter-file" class="sr-only" type="file" accept=".jar,.zip">
+          <p id="converter-file-note" class="notice" role="status" hidden></p>
+        </section>
+
+        <section class="panel" aria-labelledby="converter-target-heading">
+          <header class="step-header">
+            <span class="step-number" aria-hidden="true">02</span>
+            <div>
+              <h2 id="converter-target-heading" data-i18n="target">Escolhe a versão de destino</h2>
+              <p data-i18n="converterTargetHint">As opções dependem dos dados encontrados no mod.</p>
+            </div>
+          </header>
+          <div class="field">
+            <label for="converter-target" data-i18n="gameVersion">Versão do Minecraft</label>
+            <select id="converter-target" required disabled><option value="" data-i18n="converterSelectFile">Adiciona primeiro um mod</option></select>
+          </div>
+          <p class="hint converter-scope" data-i18n="converterScope">Suporta mods Fabric de receitas e tags, sem classes Java, da 1.20.6, 1.21 ou 1.21.1 para destinos até à 1.21.4.</p>
+        </section>
+      </div>
+      <div class="run-bar">
+        <p class="privacy"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg> <span data-i18n="privacy">Os teus ficheiros ficam protegidos e não vão ser partilhados.</span></p>
+        <button id="convert" class="button primary" type="submit" disabled data-i18n="converterNav">Converter JAR</button>
+      </div>
+      <p id="converter-run-note" class="notice" role="status" hidden></p>
+    </form>
+
+    <section id="converter-result" class="panel results" aria-labelledby="converter-result-heading" hidden>
+      <header class="results-header">
+        <div>
+          <p class="overline"><span class="pixel"></span> <span data-i18n="results">RESULTADOS</span></p>
+          <h2 id="converter-result-heading" tabindex="-1" data-i18n="converterReady">JAR experimental pronto</h2>
+          <p id="converter-result-versions" class="result-target"></p>
+        </div>
+        <a id="converter-download" class="button primary"><span data-i18n="converterDownload">Descarregar JAR</span> <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></a>
+      </header>
+      <div id="converter-summary" class="converter-summary"></div>
+      <p class="hint" data-i18n="converterResultHint">Usa o JAR com Fabric Loader e Fabric API para a versão de destino. A ferramenta adapta os dados do mod. O arranque no jogo fica por verificar.</p>
+    </section>
+    <noscript><p class="notice error" data-i18n="converterNoscript">Ativa o JavaScript para converter o ficheiro.</p></noscript>
+  </main>
+
+  <footer class="wrap footer">
+    <span class="footer-brand"><svg class="icon" aria-hidden="true"><use href="#i-cube"/></svg> UpdateMods</span>
+    <span data-i18n="credit">Desenvolvido por LExtremeTY</span>
+  </footer>
+</body>
+</html>

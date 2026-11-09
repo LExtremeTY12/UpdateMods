@@ -566,19 +566,17 @@ a { color: inherit; }
 }
 
 .nav-link:hover { border-color: #7c9c6a; color: var(--green); }
-.project-hero h1 { font-size: clamp(42px, 5.3vw, 72px); }
-.project-scope { max-width: 365px; margin-top: 14px; }
-.project-changes { margin-top: 14px; }
-.project-changes code { color: #c9e7ba; font: 12px var(--mono); }
-.project-changes .result-meta { font: 12px var(--mono); overflow-wrap: anywhere; }
+.converter-hero h1 { font-size: clamp(40px, 5.4vw, 74px); }
+.converter-scope { max-width: 370px; }
+.converter-summary { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
 
 @media (max-width: 420px) {
   .topbar-actions { gap: 5px; }
   .nav-link { padding: 5px; }
   .language-switch button { min-width: 28px; }
-  .project-hero h1 { font-size: clamp(33px, 9vw, 44px); }
+  .converter-hero h1 { font-size: clamp(33px, 9vw, 45px); }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 345px) {
   .topbar-inner { flex-wrap: wrap; padding-block: 8px; }
 }
