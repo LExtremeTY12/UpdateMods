@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10150f">
+  <meta name="description" data-i18n-content="projectDescription" content="Atualiza as configurações de um projeto Fabric para outra versão do Minecraft.">
+  <title>Atualizar projeto ZIP — UpdateMods</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/styles.css">
+  <script type="module" src="./assets/project-page.js"></script>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" class="symbols" aria-hidden="true">
+    <symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 2.5 8.5 4.8v9.4L12 21.5l-8.5-4.8V7.3L12 2.5ZM4 7.6l8 4.5 8-4.5m-8 4.5v9.1"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5zm7 4v2"/></symbol>
+  </svg>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="./">
+        <span class="brand-icon"><svg class="icon" aria-hidden="true"><use href="#i-cube"/></svg></span>
+        <span>UpdateMods</span>
+      </a>
+      <div class="topbar-actions">
+        <a class="nav-link" href="./" data-i18n="modsNav">Mods .jar</a>
+        <div class="language-switch" role="group" data-i18n-label="language" aria-label="Idioma">
+          <button type="button" data-language="pt" lang="pt-PT" aria-label="Português" aria-pressed="true">PT</button>
+          <button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap project-page">
+    <section class="hero project-hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="overline"><span class="pixel"></span> FABRIC · JAVA · MINECRAFT 1.21.x</p>
+        <h1 id="page-title"><span data-i18n="projectTitleFirst">O teu projeto,</span><br><em data-i18n="projectTitleSecond">noutra versão.</em></h1>
+        <p class="intro" data-i18n="projectIntro">Adiciona o ZIP do teu projeto Fabric e escolhe uma versão mais recente da série 1.21. Recebes o projeto com a configuração atualizada.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img src="./assets/terrain.svg" alt="" width="568" height="348" fetchpriority="high">
+        <span class="spark spark-a"></span>
+        <span class="spark spark-b"></span>
+      </div>
+    </section>
+
+    <form id="project-form" class="workspace" data-i18n-label="projectForm" aria-label="Atualizar projeto ZIP">
+      <div class="section-label"><span class="rail"></span><span data-i18n="projectSection">ATUALIZAR PROJETO ZIP</span><span class="rail"></span></div>
+      <div class="form-grid">
+        <section class="panel" aria-labelledby="project-file-heading">
+          <header class="step-header">
+            <span class="step-number" aria-hidden="true">01</span>
+            <div>
+              <h2 id="project-file-heading" data-i18n="projectFileHeading">Adiciona o ZIP do projeto</h2>
+              <p data-i18n="projectFileHint">Inclui a pasta src, o build do Gradle e o gradle.properties.</p>
+            </div>
+          </header>
+          <label id="project-drop" class="drop" for="project-file">
+            <span class="drop-icon"><svg class="icon" aria-hidden="true"><use href="#i-upload"/></svg></span>
+            <strong data-i18n="projectDrag">Arrasta o ZIP do projeto para aqui</strong>
+            <span data-i18n="projectChoose">ou escolhe um ficheiro no computador</span>
+            <span class="file-type">.ZIP · 64 MiB</span>
+          </label>
+          <input id="project-file" class="sr-only" type="file" accept=".zip,application/zip">
+          <p id="project-file-note" class="notice" role="status" hidden></p>
+        </section>
+
+        <section class="panel" aria-labelledby="project-target-heading">
+          <header class="step-header">
+            <span class="step-number" aria-hidden="true">02</span>
+            <div>
+              <h2 id="project-target-heading" data-i18n="target">Escolhe a versão de destino</h2>
+              <p data-i18n="projectTargetHint">A lista mostra as versões mais recentes da mesma série.</p>
+            </div>
+          </header>
+          <div class="field">
+            <label for="project-target" data-i18n="gameVersion">Versão do Minecraft</label>
+            <select id="project-target" required disabled><option value="" data-i18n="projectSelectFile">Adiciona primeiro um ZIP</option></select>
+          </div>
+          <p class="hint project-scope" data-i18n="projectScope">Esta ferramenta atualiza a configuração do Fabric. As mudanças no código Java e a compilação ficam a teu cargo.</p>
+        </section>
+      </div>
+      <div class="run-bar">
+        <p class="privacy"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg> <span data-i18n="privacy">Os teus ficheiros ficam protegidos e não vão ser partilhados.</span></p>
+        <button id="update-project" class="button primary" type="submit" disabled data-i18n="projectPrepare">Atualizar projeto ZIP</button>
+      </div>
+      <p id="project-run-note" class="notice" role="status" hidden></p>
+    </form>
+
+    <section id="project-result" class="panel results" aria-labelledby="project-result-heading" hidden>
+      <header class="results-header">
+        <div>
+          <p class="overline"><span class="pixel"></span> <span data-i18n="results">RESULTADOS</span></p>
+          <h2 id="project-result-heading" tabindex="-1" data-i18n="projectReady">ZIP do projeto pronto</h2>
+          <p id="project-result-versions" class="result-target"></p>
+        </div>
+        <a id="project-download" class="button primary"><span data-i18n="downloadZip">Descarregar ZIP</span> <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></a>
+      </header>
+      <ul id="project-changes" class="result-list project-changes"></ul>
+      <p class="hint" data-i18n="projectReportHint">O ZIP inclui um relatório das alterações. Antes de compilar, revê as APIs usadas pelo mod e as versões do Gradle, do Loom e das restantes dependências.</p>
+    </section>
+    <noscript><p class="notice error" data-i18n="projectNoscript">Ativa o JavaScript no browser para atualizar o projeto.</p></noscript>
+  </main>
+
+  <footer class="wrap footer">
+    <span class="footer-brand"><svg class="icon" aria-hidden="true"><use href="#i-cube"/></svg> UpdateMods</span>
+    <span data-i18n="credit">Desenvolvido por LExtremeTY</span>
+  </footer>
+</body>
+</html>

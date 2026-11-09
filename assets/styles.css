@@ -547,3 +547,38 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-link {
+  padding: 7px 9px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: #d3e9c9;
+  font-size: 12px;
+  font-weight: 680;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-link:hover { border-color: #7c9c6a; color: var(--green); }
+.project-hero h1 { font-size: clamp(42px, 5.3vw, 72px); }
+.project-scope { max-width: 365px; margin-top: 14px; }
+.project-changes { margin-top: 14px; }
+.project-changes code { color: #c9e7ba; font: 12px var(--mono); }
+.project-changes .result-meta { font: 12px var(--mono); overflow-wrap: anywhere; }
+
+@media (max-width: 420px) {
+  .topbar-actions { gap: 5px; }
+  .nav-link { padding: 5px; }
+  .language-switch button { min-width: 28px; }
+  .project-hero h1 { font-size: clamp(33px, 9vw, 44px); }
+}
+
+@media (max-width: 340px) {
+  .topbar-inner { flex-wrap: wrap; padding-block: 8px; }
+}

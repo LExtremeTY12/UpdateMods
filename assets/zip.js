@@ -1,75 +1,11 @@
 import { AppError } from './i18n.js';
 import { sha512 } from './modrinth.js';
+import { writeZip } from './zip-format.js';
 
 // Os JAR já estão comprimidos. Guardá-los sem recompressão poupa tempo.
 export const maxZipBytes = 200 * 1024 * 1024;
 
 const encoder = new TextEncoder();
-const crcTable = Uint32Array.from({ length: 256 }, (_, index) => {
-  let value = index;
-  for (let bit = 0; bit < 8; bit++) value = value & 1 ? (value >>> 1) ^ 0xedb88320 : value >>> 1;
-  return value;
-});
-
-function crc32(bytes) {
-  let value = 0xffffffff;
-  for (let index = 0; index < bytes.length; index++) {
-    value = (value >>> 8) ^ crcTable[(value ^ bytes[index]) & 255];
-  }
-  return (value ^ 0xffffffff) >>> 0;
-}
-
-function header(length, magic) {
-  const buffer = new ArrayBuffer(length);
-  const view = new DataView(buffer);
-  view.setUint32(0, magic, true);
-  return {
-    buffer,
-    u16: (at, value) => view.setUint16(at, value, true),
-    u32: (at, value) => view.setUint32(at, value, true),
-  };
-}
-
-function zipStore(entries) {
-  const files = [];
-  const directory = [];
-  let offset = 0;
-  let directorySize = 0;
-  for (const { filename, bytes } of entries) {
-    const name = encoder.encode(filename);
-    const crc = crc32(bytes);
-    const file = header(30, 0x04034b50);
-    file.u16(4, 20);
-    file.u16(6, 0x800);
-    file.u16(12, 0x21);
-    file.u32(14, crc);
-    file.u32(18, bytes.length);
-    file.u32(22, bytes.length);
-    file.u16(26, name.length);
-    files.push(file.buffer, name, bytes);
-
-    const entry = header(46, 0x02014b50);
-    entry.u16(4, 20);
-    entry.u16(6, 20);
-    entry.u16(8, 0x800);
-    entry.u16(14, 0x21);
-    entry.u32(16, crc);
-    entry.u32(20, bytes.length);
-    entry.u32(24, bytes.length);
-    entry.u16(28, name.length);
-    entry.u32(42, offset);
-    directory.push(entry.buffer, name);
-
-    offset += file.buffer.byteLength + name.length + bytes.length;
-    directorySize += entry.buffer.byteLength + name.length;
-  }
-  const end = header(22, 0x06054b50);
-  end.u16(8, entries.length);
-  end.u16(10, entries.length);
-  end.u32(12, directorySize);
-  end.u32(16, offset);
-  return new Blob([...files, ...directory, end.buffer], { type: 'application/zip' });
-}
 
 function archiveFilename(name, used) {
   const clean = name.normalize('NFC').replace(/[^\p{L}\p{N}._+() -]/gu, '_');
@@ -141,5 +77,5 @@ export async function makeModsZip(files, onProgress) {
     entries.push({ filename: archiveFilename(file.filename, used), bytes });
   }
 
-  return zipStore(entries);
+  return writeZip(entries);
 }

@@ -125,6 +125,95 @@ const messages = {
   zipLimit: ['O ZIP ultrapassa o limite de 200 MiB.', 'The ZIP exceeds the 200 MiB limit.'],
   jarIntegrity: ['O ficheiro {file} não passou a verificação de integridade.', '{file} failed the integrity check.'],
   jarNetwork: ['A transferência de {file} falhou.', 'The download of {file} failed.'],
+  projectPageTitle: ['Atualizar projeto ZIP — UpdateMods', 'Update project ZIP — UpdateMods'],
+  projectDescription: [
+    'Atualiza as configurações de um projeto Fabric para outra versão do Minecraft.',
+    'Update a Fabric project’s configuration for a different Minecraft version.',
+  ],
+  projectNav: ['Projeto ZIP', 'Project ZIP'],
+  modsNav: ['Mods .jar', '.jar mods'],
+  projectTitleFirst: ['O teu projeto,', 'Your project,'],
+  projectTitleSecond: ['noutra versão.', 'a new version.'],
+  projectIntro: [
+    'Adiciona o ZIP do teu projeto Fabric e escolhe uma versão mais recente da série 1.21. Recebes o projeto com a configuração atualizada.',
+    'Add your Fabric project ZIP and choose a newer Minecraft 1.21 release. Get the project back with its configuration updated.',
+  ],
+  projectForm: ['Atualizar projeto ZIP', 'Update project ZIP'],
+  projectSection: ['ATUALIZAR PROJETO ZIP', 'UPDATE PROJECT ZIP'],
+  projectFileHeading: ['Adiciona o ZIP do projeto', 'Add the project ZIP'],
+  projectFileHint: [
+    'Inclui a pasta src, o build do Gradle e o gradle.properties.',
+    'Include the src folder, the Gradle build script, and gradle.properties.',
+  ],
+  projectDrag: ['Arrasta o ZIP do projeto para aqui', 'Drop the project ZIP here'],
+  projectChoose: ['ou escolhe um ficheiro no computador', 'or choose a file on your computer'],
+  projectTargetHint: [
+    'A lista mostra as versões mais recentes da mesma série.',
+    'The list shows newer releases from the same version series.',
+  ],
+  projectSelectFile: ['Adiciona primeiro um ZIP', 'Add a ZIP first'],
+  projectScope: [
+    'Esta ferramenta atualiza a configuração do Fabric. As mudanças no código Java e a compilação ficam a teu cargo.',
+    'This tool updates the Fabric configuration. Review the Java code and build the project separately.',
+  ],
+  projectPrepare: ['Atualizar projeto ZIP', 'Update project ZIP'],
+  projectReady: ['ZIP do projeto pronto', 'Project ZIP ready'],
+  projectReportHint: [
+    'O ZIP inclui um relatório das alterações. Antes de compilar, revê as APIs usadas pelo mod e as versões do Gradle, do Loom e das restantes dependências.',
+    'The ZIP includes a change report. Before building, review the APIs used by the mod and the Gradle, Loom, and other dependency versions.',
+  ],
+  projectNoscript: [
+    'Ativa o JavaScript no browser para atualizar o projeto.',
+    'Enable JavaScript in your browser to update the project.',
+  ],
+  projectZipInvalid: [
+    'Não foi possível ler o ZIP. Usa um arquivo ZIP normal, sem palavra-passe, com nomes de ficheiro em UTF-8.',
+    'Could not read the archive. Use a standard, unencrypted ZIP with UTF-8 file names.',
+  ],
+  projectZipTooLarge: [
+    'O ZIP deve ter conteúdo, até 64 MiB comprimidos, 128 MiB extraídos e 2 500 entradas.',
+    'Use a nonempty ZIP with up to 64 MiB compressed, 128 MiB extracted, and 2,500 entries.',
+  ],
+  projectBrowserUnsupported: [
+    'Este browser não consegue descomprimir o ZIP. Tenta num browser recente.',
+    'This browser cannot decompress the ZIP. Try an up-to-date browser.',
+  ],
+  projectUnsupported: [
+    'Usa um único projeto Fabric em Java com o formato habitual do Gradle e as versões declaradas em gradle.properties.',
+    'Use a single Fabric Java project with a standard Gradle layout and versions declared in gradle.properties.',
+  ],
+  projectInvalidManifest: [
+    'Confirma que src/main/resources/fabric.mod.json contém um manifesto Fabric válido com id e depends.',
+    'Check that src/main/resources/fabric.mod.json is a valid Fabric manifest with id and depends.',
+  ],
+  projectUnsupportedVersion: [
+    'Esta versão da ferramenta aceita projetos Minecraft Java da série 1.21.x.',
+    'This version of the tool accepts Minecraft Java projects from the 1.21.x series.',
+  ],
+  projectFabricUnavailable: [
+    'Não foi possível consultar as versões do Fabric. Tenta novamente.',
+    'Could not fetch Fabric versions. Try again.',
+  ],
+  projectDependencyMissing: [
+    'Falta uma versão compatível de uma dependência do Fabric para este destino.',
+    'A compatible Fabric dependency version is missing for this target.',
+  ],
+  projectInvalidTarget: [
+    'Escolhe uma versão mais recente da série 1.21.x.',
+    'Choose a newer release from the 1.21.x series.',
+  ],
+  projectFileType: ['Seleciona um ficheiro .zip.', 'Select a .zip file.'],
+  projectReading: ['A ler o ZIP do projeto…', 'Reading the project ZIP…'],
+  projectSource: ['{file} · Minecraft {version} · Fabric', '{file} · Minecraft {version} · Fabric'],
+  projectNoTargets: [
+    'Este projeto já está na versão mais recente da série 1.21.x.',
+    'This project is already on the newest supported 1.21.x release.',
+  ],
+  projectChecking: ['A consultar as dependências do Fabric…', 'Looking up Fabric dependencies…'],
+  projectPacking: ['A preparar o ZIP atualizado…', 'Preparing the updated ZIP…'],
+  projectFailed: ['Não foi possível atualizar o projeto.', 'Could not update the project.'],
+  projectReportTitle: ['UpdateMods — Relatório de atualização', 'UpdateMods — Project update report'],
+  projectNotSet: ['por definir', 'not set'],
 };
 
 const storageKey = 'updatemods-language';
@@ -154,10 +243,10 @@ export function savedLanguage() {
   }
 }
 
-export function setLanguage(next) {
+export function setLanguage(next, title = 'pageTitle') {
   language = next === 'en' ? 'en' : 'pt';
   document.documentElement.lang = language === 'pt' ? 'pt-PT' : 'en';
-  document.title = t('pageTitle');
+  document.title = t(title);
   for (const node of document.querySelectorAll('[data-i18n]')) {
     node.textContent = t(node.dataset.i18n);
   }
